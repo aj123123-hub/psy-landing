@@ -261,7 +261,8 @@
   }
   .hero-media .glow{
     position:absolute; inset:0;
-    box-shadow:inset 0 0 120px 40px rgba(255,31,143,0.12), inset 0 0 90px 20px rgba(0,0,0,0.55);
+    background:radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.75) 100%);
+    box-shadow:inset 0 0 120px 40px rgba(255,31,143,0.1);
     pointer-events:none;
   }
   .stamp{z-index:2;}
@@ -545,8 +546,8 @@
     content:"";
     position:absolute; inset:0;
     background:linear-gradient(90deg, var(--graphite-900) 0%, rgba(20,18,16,0.75) 32%, rgba(20,18,16,0.2) 62%, rgba(20,18,16,0) 85%),
-               linear-gradient(0deg, var(--graphite-900) 0%, rgba(20,18,16,0) 25%);
-    box-shadow:inset 0 0 100px 30px rgba(0,0,0,0.6);
+               linear-gradient(0deg, var(--graphite-900) 0%, rgba(20,18,16,0) 25%),
+               radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.7) 100%);
   }
   .final .section-inner{position:relative; z-index:1;}
 
