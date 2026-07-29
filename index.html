@@ -7,8 +7,12 @@
 <meta name="description" content="Провокативная терапия. Один честный разговор вместо месяцев походов к психологу.">
 <meta property="og:title" content="Александра Бабок — провокативная терапия для мужчин">
 <meta property="og:description" content="Один честный разговор вместо месяцев походов к психологу. Только для мужчин.">
-<meta property="og:image" content="assets/hero.jpg">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -58,8 +62,8 @@
     box-shadow:0 0 18px var(--fuchsia-glow), inset 0 0 8px rgba(255,31,143,0.15);
     transform:rotate(6deg);
     opacity:0;
-    animation:stampIn .4s ease forwards 1.3s;
   }
+  html.fonts-ready .stamp{animation:stampIn .4s ease forwards 1.3s;}
   @keyframes stampIn{
     from{opacity:0; transform:rotate(6deg) scale(1.4);}
     to{opacity:1; transform:rotate(6deg) scale(1);}
@@ -126,12 +130,12 @@
   h1 .line span{
     display:inline-block;
     transform:translateY(105%);
-    animation:slideUp .7s cubic-bezier(.2,.7,.2,1) forwards;
   }
-  h1 .line:nth-child(1) span{animation-delay:.1s;}
-  h1 .line:nth-child(2) span{animation-delay:.2s;}
-  h1 .line:nth-child(3) span{animation-delay:.3s;}
-  h1 .line:nth-child(4) span{animation-delay:.4s;}
+  html.fonts-ready h1 .line span{animation:slideUp .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  html.fonts-ready h1 .line:nth-child(1) span{animation-delay:.1s;}
+  html.fonts-ready h1 .line:nth-child(2) span{animation-delay:.2s;}
+  html.fonts-ready h1 .line:nth-child(3) span{animation-delay:.3s;}
+  html.fonts-ready h1 .line:nth-child(4) span{animation-delay:.4s;}
   .redact{
     position:relative;
     display:inline-block;
@@ -146,8 +150,8 @@
     inset:-0.04em -0.06em;
     background:#000;
     transform-origin:left;
-    animation:unredact .55s cubic-bezier(.6,0,.2,1) forwards 1.05s;
   }
+  html.fonts-ready .redact .bar{animation:unredact .55s cubic-bezier(.6,0,.2,1) forwards 1.05s;}
   @keyframes unredact{
     to{transform:scaleX(0);}
   }
@@ -161,8 +165,8 @@
     padding-left:1.1rem;
     border-left:2px solid var(--fuchsia);
     opacity:0;
-    animation:rise .6s ease forwards .8s;
   }
+  html.fonts-ready .sub{animation:rise .6s ease forwards .8s;}
   .cta-row{
     margin-top:2.8rem;
     display:flex;
@@ -171,8 +175,8 @@
     min-width:0;
     gap:1.4rem;
     opacity:0;
-    animation:rise .6s ease forwards 1s;
   }
+  html.fonts-ready .body-wrap .cta-row{animation:rise .6s ease forwards 1s;}
   .cta{
     display:inline-flex;
     align-items:center;
@@ -218,9 +222,10 @@
     to{transform:translateY(0);}
   }
   @media (prefers-reduced-motion: reduce){
-    h1 .line span{animation:none; transform:none;}
+    html.fonts-ready h1 .line span, h1 .line span{animation:none; transform:none;}
+    html.fonts-ready .sub, html.fonts-ready .body-wrap .cta-row, html.fonts-ready .stamp,
     .sub, .cta-row, .stamp{animation:none; opacity:1; transform:none;}
-    .redact .bar{animation:none; transform:scaleX(0);}
+    html.fonts-ready .redact .bar, .redact .bar{animation:none; transform:scaleX(0);}
     .reveal{transition:none; opacity:1; transform:none;}
     .crosshair{display:none;}
     [data-parallax]{transform:none !important;}
@@ -285,8 +290,9 @@
     padding:6rem 7vw;
     border-top:1px dashed var(--line);
     min-width:0;
+    background:radial-gradient(circle at 1px 1px, rgba(237,233,226,0.045) 1px, transparent 0) 0 0/14px 14px, var(--graphite-950);
   }
-  section.alt{background:var(--graphite-900);}
+  section.alt{background:radial-gradient(circle at 1px 1px, rgba(237,233,226,0.045) 1px, transparent 0) 0 0/14px 14px, var(--graphite-900);}
   .section-inner{max-width:1000px; min-width:0;}
   .section-eyebrow{
     display:flex;
@@ -669,11 +675,71 @@
 
   /* ---- parallax images ---- */
   [data-parallax]{will-change:transform;}
+
+  /* ---- side navigation ---- */
+  .side-nav{
+    position:fixed;
+    right:1.6rem;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:500;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:0.9rem;
+  }
+  .side-nav a{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    text-decoration:none;
+    padding:2px 0;
+  }
+  .side-dot{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--line);
+    border:1px solid var(--line);
+    transition:background .25s ease, border-color .25s ease, transform .25s ease;
+    flex:none;
+  }
+  .side-label{
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0;
+    transform:translateX(6px);
+    transition:opacity .2s ease, transform .2s ease;
+    white-space:nowrap;
+  }
+  .side-nav a:hover .side-label{opacity:1; transform:translateX(0);}
+  .side-nav a:hover .side-dot{border-color:var(--fuchsia);}
+  .side-nav a.active .side-dot{
+    background:var(--fuchsia);
+    border-color:var(--fuchsia);
+    box-shadow:0 0 8px var(--fuchsia-glow);
+    transform:scale(1.4);
+  }
+  .side-nav a.active .side-label{color:var(--ink);}
+  @media (max-width:900px){
+    .side-nav{display:none;}
+  }
 </style>
 </head>
 <body>
 
-<div class="hero">
+<nav class="side-nav" aria-label="Разделы страницы">
+  <a href="#hero" data-num="01"><span class="side-dot"></span><span class="side-label">Начало</span></a>
+  <a href="#method" data-num="02"><span class="side-dot"></span><span class="side-label">Метод</span></a>
+  <a href="#who" data-num="03"><span class="side-dot"></span><span class="side-label">Кому это</span></a>
+  <a href="#process" data-num="04"><span class="side-dot"></span><span class="side-label">Как проходит</span></a>
+  <a href="#price" data-num="05"><span class="side-dot"></span><span class="side-label">Цена</span></a>
+  <a href="#expert" data-num="06"><span class="side-dot"></span><span class="side-label">Эксперт</span></a>
+  <a href="#cta" data-num="07"><span class="side-dot"></span><span class="side-label">Записаться</span></a>
+</nav>
+
+<div class="hero" id="hero">
   <div class="hero-media"><img src="assets/hero.jpg" alt="" loading="eager" data-parallax><span class="glow"></span></div>
   <div class="stamp">Приём ведётся</div>
 
@@ -818,6 +884,40 @@
 <script>
 (function(){
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hold hero entrance animation until the real fonts are loaded
+  if('fonts' in document){
+    document.fonts.ready.then(function(){ document.documentElement.classList.add('fonts-ready'); });
+    setTimeout(function(){ document.documentElement.classList.add('fonts-ready'); }, 2500);
+  } else {
+    document.documentElement.classList.add('fonts-ready');
+  }
+
+  // side-nav active section tracking
+  var navLinks = document.querySelectorAll('.side-nav a');
+  if(navLinks.length){
+    var navSections = Array.prototype.map.call(navLinks, function(a){
+      return document.querySelector(a.getAttribute('href'));
+    });
+    var setActive = function(){
+      var pos = window.scrollY + window.innerHeight * 0.4;
+      var current = 0;
+      navSections.forEach(function(sec, i){
+        if(sec && sec.offsetTop <= pos) current = i;
+      });
+      navLinks.forEach(function(a, i){
+        a.classList.toggle('active', i === current);
+      });
+    };
+    var navTicking = false;
+    window.addEventListener('scroll', function(){
+      if(!navTicking){
+        requestAnimationFrame(function(){ setActive(); navTicking = false; });
+        navTicking = true;
+      }
+    }, {passive:true});
+    setActive();
+  }
 
   // scroll reveal
   var revealEls = document.querySelectorAll('.reveal');
