@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Первый экран — вариант 3 (личное дело)</title>
+<meta name="description" content="Провокативная терапия. Один честный разговор вместо месяцев походов к психологу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --graphite-950:#0a0a0a;
+    --graphite-900:#141210;
+    --ink:#ede9e2;
+    --ink-soft:#8a8880;
+    --fuchsia:#ff1f8f;
+    --fuchsia-glow:rgba(255,31,143,0.55);
+    --line:#2a2a26;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{overflow-x:hidden;}
+  html,body{background:var(--graphite-950);}
+  body{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .hero{
+    position:relative;
+    min-height:100vh;
+    min-height:100dvh;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(237,233,226,0.05) 1px, transparent 0) 0 0/14px 14px,
+      radial-gradient(ellipse 60% 50% at 88% 92%, rgba(255,31,143,0.16), transparent 65%),
+      var(--graphite-950);
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    padding:0 7vw;
+  }
+  .stamp{
+    position:absolute;
+    top:5.4rem;
+    right:7vw;
+    border:2px solid var(--fuchsia);
+    color:var(--fuchsia);
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    padding:0.5rem 0.8rem;
+    box-shadow:0 0 18px var(--fuchsia-glow), inset 0 0 8px rgba(255,31,143,0.15);
+    transform:rotate(6deg);
+    opacity:0;
+    animation:stampIn .4s ease forwards 1.3s;
+  }
+  @keyframes stampIn{
+    from{opacity:0; transform:rotate(6deg) scale(1.4);}
+    to{opacity:1; transform:rotate(6deg) scale(1);}
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.5rem 1rem;
+    min-width:0;
+    padding:2.6rem 0 1.6rem 0;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px dashed var(--line);
+  }
+  .topbar .mark{color:var(--ink);letter-spacing:0.14em;font-weight:600;}
+  .body-wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    max-width:1000px;
+    min-width:0;
+    padding:6vh 0;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:0.6em;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:2rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;
+    height:8px;
+    background:var(--fuchsia);
+    display:inline-block;
+    flex:none;
+  }
+  .eyebrow b{color:var(--ink); font-weight:600;}
+  h1{
+    font-family:'Archivo Black', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(1.3rem, 6.4vw, 5rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    min-width:0;
+  }
+  h1 .line{
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    min-width:0;
+  }
+  h1 .line span{
+    display:inline-block;
+    transform:translateY(105%);
+    animation:slideUp .7s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  h1 .line:nth-child(1) span{animation-delay:.1s;}
+  h1 .line:nth-child(2) span{animation-delay:.2s;}
+  h1 .line:nth-child(3) span{animation-delay:.3s;}
+  h1 .line:nth-child(4) span{animation-delay:.4s;}
+  .redact{
+    position:relative;
+    display:inline-block;
+  }
+  .redact u{
+    text-decoration:none;
+    color:var(--fuchsia);
+    text-shadow:0 0 18px var(--fuchsia-glow), 0 0 42px rgba(255,31,143,0.35);
+  }
+  .redact .bar{
+    position:absolute;
+    inset:-0.04em -0.06em;
+    background:#000;
+    transform-origin:left;
+    animation:unredact .55s cubic-bezier(.6,0,.2,1) forwards 1.05s;
+  }
+  @keyframes unredact{
+    to{transform:scaleX(0);}
+  }
+  .sub{
+    margin-top:2.2rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    line-height:1.8;
+    color:var(--ink-soft);
+    max-width:44ch;
+    padding-left:1.1rem;
+    border-left:2px solid var(--fuchsia);
+    opacity:0;
+    animation:rise .6s ease forwards .8s;
+  }
+  .cta-row{
+    margin-top:2.8rem;
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    min-width:0;
+    gap:1.4rem;
+    opacity:0;
+    animation:rise .6s ease forwards 1s;
+  }
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:1rem 1.9rem;
+    text-decoration:none;
+    transition:background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .cta:hover{background:var(--fuchsia); color:var(--graphite-950); border-color:var(--fuchsia); box-shadow:0 0 24px var(--fuchsia-glow);}
+  .cta:focus-visible, a:focus-visible{outline:2px solid var(--fuchsia); outline-offset:3px;}
+  .cta-note{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .footline{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:0.5rem 1rem;
+    min-width:0;
+    padding:1.4rem 0 2.6rem 0;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-top:1px dashed var(--line);
+    color:var(--ink-soft);
+  }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes slideUp{
+    from{transform:translateY(105%);}
+    to{transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    h1 .line span{animation:none; transform:none;}
+    .sub, .cta-row, .stamp{animation:none; opacity:1; transform:none;}
+    .redact .bar{animation:none; transform:scaleX(0);}
+  }
+  @media (max-width:640px){
+    .hero{padding:0 6vw;}
+    .stamp{display:none;}
+  }
+  .hero-media{
+    position:absolute;
+    top:0; right:0; bottom:0;
+    width:46vw;
+    max-width:680px;
+    overflow:hidden;
+    z-index:0;
+  }
+  .hero-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:60% 30%;
+    display:block;
+  }
+  .hero-media::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, var(--graphite-950) 0%, rgba(10,10,10,0.88) 14%, rgba(10,10,10,0.3) 42%, rgba(10,10,10,0) 68%);
+  }
+  .hero-media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, var(--graphite-950) 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 78%, var(--graphite-950) 100%);
+  }
+  .hero-media .glow{
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 120px 40px rgba(255,31,143,0.12);
+    pointer-events:none;
+  }
+  .stamp{z-index:2;}
+  .topbar, .body-wrap, .footline{position:relative; z-index:1;}
+  @media (max-width:900px){
+    .hero-media{
+      width:100%;
+      max-width:none;
+      left:0;
+      top:0;
+      bottom:0;
+    }
+    .hero-media img{
+      object-position:62% 22%;
+      opacity:0.45;
+    }
+    .hero-media::before{
+      background:linear-gradient(0deg, var(--graphite-950) 0%, rgba(10,10,10,0.6) 30%, rgba(10,10,10,0.6) 65%, var(--graphite-950) 100%);
+    }
+    .hero-media::after{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-media"><img src="assets/hero.jpg" alt="" loading="eager"><span class="glow"></span></div>
+  <div class="stamp">Приём ведётся</div>
+
+  <div class="topbar">
+    <div class="mark">И. ФАМИЛИЯ</div>
+    <div>Москва / Онлайн</div>
+  </div>
+
+  <div class="body-wrap">
+    <div class="eyebrow">Провокативная терапия <b>·</b> только для мужчин</div>
+    <h1>
+      <span class="line"><span>Ты не разбираешься</span></span>
+      <span class="line"><span>в себе — ты</span></span>
+      <span class="line"><span class="redact"><u>прячешься</u><span class="bar" aria-hidden="true"></span></span></span>
+      <span class="line"><span>от себя</span></span>
+    </h1>
+    <p class="sub">Один разговор — без анестезии. Дальше прятаться будет некуда.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Написать →</a>
+      <span class="cta-note">Без права спрятаться повторно.</span>
+    </div>
+  </div>
+
+  <div class="footline">
+    <div>Провокативная терапия</div>
+    <div>Скролл вниз</div>
+  </div>
+</div>
+
+</body>
+</html>
